@@ -20,13 +20,13 @@ def self.all
  volunteers
 end
 
-# def save
-#   project_list = DB.exec("INSERT INTO projects (name) VALUES ('#{@name}') RETURNING id;")
-#   @id = project_list.first().fetch("id").to_i()
-# end
+def save
+  volunteer_list = DB.exec("INSERT INTO volunteers (name) VALUES ('#{@name}') RETURNING id;")
+  @id = volunteer_list.first().fetch("id").to_i()
+end
 
 # def self.id
-#   project = DB.exec("SELECT * FROM projects WHERE id = '#{id}';").first()
+#   volunteer = DB.exec("SELECT * FROM projects WHERE id = '#{id}';").first()
 #   name = project.fetch("name")
 #   id = project.fetch("id").to_i
 #   new_id = Project.new({:name => name, :id => id})
@@ -41,9 +41,9 @@ end
 #   new_project
 # end
 #
-# def ==(another_project)
-#   self.name().==(another_project.name()).&(self.id().==(another_project.id()))
-# end
+def ==(another_volunteer)
+  self.name().==(another_volunteer.name()).&(self.id().==(another_volunteer.id()))
+end
 #
 # def self.find(id)
 #   project = DB.exec("SELECT * FROM projects WHERE id = #{id};").first
