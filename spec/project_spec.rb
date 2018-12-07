@@ -60,7 +60,7 @@ describe Project do
       expect(Project.find(project1.id)).to eq project1
     end
   end
-
+  #
   # describe '#volunteers' do
   #   it 'returns all volunteers for a specific project' do
   #     project = Project.new({:title => 'Teaching Kids to Code', :id => nil})
