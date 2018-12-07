@@ -12,6 +12,15 @@ get("/") do
   erb(:home)
 end
 
+get("/projects") do
+  @projects = Project.all()
+  erb(:project)
+end
+
+get("/projects/new") do
+  erb(:home)
+end
+
 post("/projects") do
 title = params.fetch("title")
 project = Project.new({:title => title, :id => nil})
@@ -22,20 +31,19 @@ end
 
 get("/projects/:id") do
   @project = Project.find(params.fetch("id").to_i())
-  erb(:project)
-end
-
-get("/projects/:id/edit") do
-
-  @project = Project.find(params.fetch("id").to_i())
   erb(:project_update)
 end
 
-patch ("/projects/:id") do
+get("/projects/:id/edit") do
+  @project = Project.find(params.fetch("id").to_i())
+  erb(:rename_project)
+end
+
+patch ("/projects/:id/edit") do
  title = params.fetch("title")
  @project = Project.find(params.fetch("id").to_i())
  @project.update({:title => title})
- erb(:project)
+ erb(:project_detail)
 end
 
 post("/volunteers") do
