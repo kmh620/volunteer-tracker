@@ -43,6 +43,10 @@ class Project
     new_project
   end
 
+  def ==(another_project)
+    self.title().==(another_project.title()).&(self.id().==(another_project.id()))
+  end
+
 
 
 
