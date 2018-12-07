@@ -1,0 +1,26 @@
+
+<h1><%= @project.title() %></h1>
+<p><a href="/projects/<%= @project.id() %>/edit">Edit <%= @project.title() %> project</a></p>
+<p><a href="/">Return to Main Page</a></p>
+
+
+<button type="button" name="button">Delete Project</button>
+
+
+
+  <label for="name">Volunteer Name:</label>
+  <input id="name" name="name" type="text">
+
+  <button type="submit">Add Volunteer</button>
+
+  <% if @volunteers.any?() %>
+  <p>Click on a volunteer to see details:</p>
+
+  <ul>
+    <% @volunteers.each do |volunteer| %>
+    <li><a href="/volunteers/<%= volunteer.id() %>"><%= volunteer.name() %></a></li>
+    <% end %>
+  </ul>
+  <% else %>
+  <p>No Current Volunteers</p>
+  <% end %>

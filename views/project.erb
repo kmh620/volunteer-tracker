@@ -1,15 +1,3 @@
-<h1>Welcome!</h1>
-<br>
-<h3>Create New Project</h3>
-
-<form action="/projects" method="post">
-    <label for="title">Project Title</label>
-    <input type="text" name="title">
-  <br>
-  <button type="submit">Create Project</button>
-</form>
-<br>
-
 <% if @projects.any?() %>
 <p>Click on a project to see details:</p>
 
