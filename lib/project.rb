@@ -47,7 +47,23 @@ class Project
     self.title().==(another_project.title()).&(self.id().==(another_project.id()))
   end
 
+  def self.find(id)
+    project = DB.exec("SELECT * FROM projects WHERE id = #{id};").first
+    title = project.fetch("title")
+    id = project.fetch("id").to_i
 
+    new_project = Project.new({:title => title, :id => id})
+    new_project
+  end
 
+  def delete
+    DB.exec("DELETE FROM projects WHERE id = #{self.id()};")
+  end
+
+  def update(attributes)
+     @title = attributes.fetch(:title, @title)
+     @id = self.id()
+     DB.exec("UPDATE projects SET title = '#{@title}' WHERE id = #{@id};")
+   end
 
 end
