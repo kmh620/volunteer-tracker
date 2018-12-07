@@ -4,30 +4,39 @@ require 'pry'
 
 class Project
 
-  attr_reader(:p_name, :p_id)
+  attr_reader(:title, :id)
 
   def initialize(attributes)
-    @p_name = attributes.fetch(:p_name)
-    @p_id = attributes.fetch(:p_id)
+    @title = attributes.fetch(:title)
+    @id = attributes.fetch(:id)
   end
 
   def self.all
     project_list = DB.exec("SELECT * FROM projects;")
     projects = []
     project_list.each() do |project|
-     p_name = project.fetch("p_name")
-     p_id = project.fetch("p_id").to_i
-     projects.push(Project.new({:p_name => p_name, :p_id => p_id}))
+     title = project.fetch("title")
+     id = project.fetch("id").to_i
+     projects.push(Project.new({:title => title, :id => id}))
    end
    projects
   end
-  #
-  # def save
-  #
-  # end
+
+  def save
+    project_list = DB.exec("INSERT INTO projects (title) VALUES ('#{@title}') RETURNING id;")
+    @id = project_list.first().fetch("id").to_i()
+  end
   #
   # def find
   # end
+
+  def self.title
+    project = DB.exec("SELECT * FROM projects WHERE title = '#{title}';").first()
+    title = project.fetch("title")
+    id = project.fetch("id").to_i
+    new_project = Project.new({:title => title, :id => id})
+    new_project
+  end
 
 
 end

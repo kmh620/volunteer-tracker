@@ -1,12 +1,12 @@
 require "spec_helper"
 
 describe Project do
-  # describe '#title' do
-  #   it 'returns the project title' do
-  #     project = Project.new({:title => 'Teaching Kids to Code', :id => nil})
-  #     expect(project.title).to eq 'Teaching Kids to Code'
-  #   end
-  # end
+  describe '.title' do
+    it 'returns the project title' do
+      project = Project.new({:title => 'Teaching Kids to Code', :id => nil})
+      expect(project.title).to eq 'Teaching Kids to Code'
+    end
+  end
   #
   # context '#id' do
   #   it 'returns the id of the project before saving project' do
@@ -35,13 +35,13 @@ describe Project do
     end
   end
 
-  #   it 'returns all projects' do
-  #     project1 = Project.new({:title => 'Teaching Kids to Code', :id => nil})
-  #     project1.save
-  #     project2 = Project.new({:title => 'Teaching Ruby to Kids', :id => nil})
-  #     project2.save
-  #     expect(Project.all).to eq [project1, project2]
-  #   end
+    # it 'returns all projects' do
+    #   project1 = Project.new({:title => 'Teaching Kids to Code', :id => nil})
+    #   project1.save
+    #   project2 = Project.new({:title => 'Teaching Ruby to Kids', :id => nil})
+    #   project2.save
+    #   expect(Project.all).to eq [project1, project2]
+    # end
   # end
   #
   # describe '#save' do
