@@ -25,43 +25,26 @@ def save
   @id = volunteer_list.first().fetch("id").to_i()
 end
 
-# def self.id
-#   volunteer = DB.exec("SELECT * FROM projects WHERE id = '#{id}';").first()
-#   name = project.fetch("name")
-#   id = project.fetch("id").to_i
-#   new_id = Project.new({:name => name, :id => id})
-#   new_id
-# end
+def self.name
+  volunteer = DB.exec("SELECT * FROM volunteers WHERE name = '#{name}';").first()
+  name = volunteer.fetch("name")
+  id = volunteer.fetch("id").to_i
+  new_volunteer = Volunteer.new({:name => name, :id => id})
+  new_volunteer
+end
 
-# def self.name
-#   project = DB.exec("SELECT * FROM projects WHERE name = '#{name}';").first()
-#   name = project.fetch("name")
-#   id = project.fetch("id").to_i
-#   new_project = Project.new({:name => name, :id => id})
-#   new_project
-# end
-#
 def ==(another_volunteer)
   self.name().==(another_volunteer.name()).&(self.id().==(another_volunteer.id()))
 end
 #
-# def self.find(id)
-#   project = DB.exec("SELECT * FROM projects WHERE id = #{id};").first
-#   name = project.fetch("name")
-#   id = project.fetch("id").to_i
-#
-#   new_project = Project.new({:name => name, :id => id})
-#   new_project
-# end
-#
-# def delete
-#   DB.exec("DELETE FROM projects WHERE id = #{self.id()};")
-# end
-#
-# def update(attributes)
-#    @name = attributes.fetch(:name, @name)
-#    @id = self.id()
-#    DB.exec("UPDATE projects SET name = '#{@name}' WHERE id = #{@id};")
-#  end
+def self.find(id)
+  volunteer = DB.exec("SELECT * FROM volunteers WHERE id = #{id};").first
+  name = volunteer.fetch("name")
+  id = volunteer.fetch("id").to_i
+
+  new_volunteer = Volunteer.new({:name => name, :id => id})
+  new_volunteer
+end
+
 
 end
