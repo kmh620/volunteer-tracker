@@ -1,23 +1,25 @@
-<h1>Welcome!</h1>
-<br>
-<h3>Create New Project</h3>
 
-<form action="/projects" method="post">
-    <label for="title">Project Title</label>
-    <input type="text" name="title">
-  <br>
+<h1>Welcome to Volunteer Tracker</h1>
+
+<h3>Create a new project:</h3>
+
+<form action="/" method="post">
+  <div class="form-group">
+    <label for="title">Project title</label>
+    <input class="form-control" type="text" name="title" id="title">
+  </div>
+
   <button type="submit">Create Project</button>
 </form>
-<br>
 
-<% if @projects.any?() %>
-<p>Click on a project to see details:</p>
-
-<ul>
+  <% if @projects.any?() %>
+  <h3>Projects List</h3>
+  <p>Click project to see details</p>
+  <ul>
   <% @projects.each do |project| %>
-  <li><a href="/projects/<%= project.id() %>"><%= project.title() %></a></li>
+    <li><a href="/projects/<%= project.id %>"><%= project.title %></a></li>
   <% end %>
-</ul>
-<% else %>
-<p>No Current Projects</p>
-<% end %>
+  </ul>
+  <% else %>
+  <p>There are no projects yet</p>
+  <% end %>

@@ -12,54 +12,50 @@ get("/") do
   erb(:home)
 end
 
-get("/projects") do
-  @projects = Project.all()
-  erb(:project)
-end
-
-get("/projects/new") do
-  erb(:home)
-end
-
-post("/projects") do
-title = params.fetch("title")
-project = Project.new({:title => title, :id => nil})
-project.save()
-@projects = Project.all()
-erb(:home)
+post("/") do
+  title = params.fetch("title")
+  project = Project.new({:title => title, :id => nil})
+  project.save
+  redirect("/")
 end
 
 get("/projects/:id") do
-  @project = Project.find(params.fetch("id").to_i())
-  erb(:project_update)
+  @project_id = params[:id]
+  @project = Project.find(params[:id])
+  @volunteers = @project.volunteers()
+  erb(:project_detail)
 end
 
 get("/projects/:id/edit") do
-  @project = Project.find(params.fetch("id").to_i())
-  erb(:rename_project)
+  @project_id = params[:id]
+  @project = Project.find(params[:id])
+  erb(:edit_project)
 end
 
-patch ("/projects/:id/edit") do
- title = params.fetch("title")
- @project = Project.find(params.fetch("id").to_i())
- @project.update({:title => title})
- erb(:project_detail)
+post("/projects/:id/volunteers") do
+  project_id = params[:id]
+  @project = Project.find(params[:id])
+  name = params["name"]
+  id =params["id"]
+  volunteer = Volunteer.new(:project_id => @project.id, :name => name, :id => id)
+  volunteer.save
+  redirect("/")
 end
 
-post("/volunteers") do
-  name = params.fetch("name")
-  id = params.fetch("id").to_i
-  project_id = params.fetch("project_id").to_i()
-  volunteer = Volunteer.new({:name => name, :project_id => project_id, :id => id})
-  volunteer.save()
-  @project = Project.find(id)
-  erb(:project)
+get("/volunteer/:id") do
+  @volunteer = Volunteer.find(params[:id])
+  erb(:volunteer_detail)
 end
 
+patch("/projects/:id/edit") do
+  project = Project.find(params[:id])
+  title = params.fetch("title")
+  project.update({:title => title})
+  redirect("/")
+end
 
-delete("/projects/:id") do
-  @project = Project.find(params.fetch("id").to_i())
-  @project.delete()
-  @projects = Project.all()
-  erb(:home)
+delete("/projects/:id/edit") do
+  project = Project.find(params[:id])
+  project.delete
+  redirect("/")
 end
