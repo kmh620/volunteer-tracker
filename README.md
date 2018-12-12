@@ -12,7 +12,9 @@
 * _Log in to GitHub_
 * _Clone GitHub URL in terminal_
 * _Open file in Atom_
-* _Run database_
+* _Restore database in terminal by running:_
+  * _createdb volunteer_tracker_
+  * _psql volunteer_tracker < my_database.sql_
 * _Run rspec for tests_
 
 ### Technologies Used
